@@ -1,0 +1,31 @@
+---
+title: "Developing Data Products Wk 2 Assignment"
+author: "Ryan Obuchowski"
+date: "1/16/2020"
+output: html_document
+---
+
+# Overview 
+This project uses the leaflet package with R markdown to create an interactive map.  This Map shows four selected ice hockey rinks around New Haven, Connecticut.  If you click on the map points, you will be redirected to the site associated with each location. 
+
+## Connecticut Ice hockey rinks
+```{r}
+library(leaflet)
+set.seed(1441)
+RinkLatLong <- data.frame(
+        lat= c(41.3168, 41.3967, 41.3172, 41.2616),
+        lng= c(-72.9250, -72.8133, -72.9064, -72.9589)
+)
+
+rinkSites <- c( 
+        "<a href='https://en.wikipedia.org/wiki/Ingalls_Rink'>Ingalls Rink</a>",
+        "<a href='http://www.northfordice.com/Page.asp?n=72212&org=NORTHFORDICE'>Northford Ice Pavilion</a>",
+        "<a href='https://www.newhavenct.gov/gov/depts/parks/facilities/ralph_walker_skating_rink.htm'> Ralph Walker Rink</a>",
+        "<a href='http://www.bennettrink.com'/>Edward L. Bennett Rink</a>")
+rL <- RinkLatLong %>%
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(popup = rinkSites)
+rL
+```
+
